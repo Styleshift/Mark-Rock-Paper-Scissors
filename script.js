@@ -48,35 +48,16 @@ esle bericht winnaar, en geef optie voor nieuw spel.
 let playerScore = 0;
 let computerScore = 0;
 
-function playRound(playerSelection, computerSelection) {
-        if (playerSelection === 'rock' && computerSelection === 'rock')
-         return 'Its a tie! You both picked rock, seems like you\'re both rock-solid.';
-                
-        else if (playerSelection === 'rock' && computerSelection === 'paper')
-        return 'You lose! A rock ain\'t always a hard place, sometimes paper can cover it!';
-                playerScore++;
-        else if (playerSelection === 'rock' && computerSelection === 'scissors')
-        return 'You win! Rock and roll baby!';
-        else if (playerSelection === 'paper' && computerSelection === 'rock')
-        return 'You win! Looks like the computer just got schooled, paper always wins.';
-        else if (playerSelection === 'paper' && computerSelection === 'paper')
-        return 'It\'s a tie! You both picked paper, but let\'s be real, paper is the best choice anyway.';
-        else if (playerSelection === 'paper' && computerSelection === 'scissors')
-        return 'You lose! Looks like paper just met its mortal enemy, scissors always wins!';
-        else if (playerSelection === 'scissors' && computerSelection === 'rock')
-        return 'You lose! But I bet the rock band next door is loving this!';
-        else if (playerSelection === 'scissors' && computerSelection === 'paper')
-        return 'You win! Looks like the computer got cut down to size!';
-        else
-        return 'It\'s a tie! You both picked scissorts, seems like you both have a sharp mind and cutting edge strategy!........defealt';
-}
 
+/* 
 
-
-//functie voor het maken van de computer's keuze
-let randomChoice;
-
+==========================================================
+* Note from Keenan - Code needs to generate random answer.
+==========================================================
+*/
+// added randomChoice variable to function. (Scope) 
 function getComputerChoice() {
+        const randomChoice = (Math.floor(Math.random() * 3)) 
         if (randomChoice === 0) {
                 return 'rock';
         } 
@@ -88,22 +69,82 @@ function getComputerChoice() {
         }
 }
 
+//Test getComputerChoice - Keenan
+//console.log(getComputerChoice())
 
-let playerSelection;
-let computerSelection;
+/*
+=-==============================================================================================================
+Note from Keenan. Add playerScore++ and computerScore++ BEFORE return statement. Otherwise code is unreachable.
+================================================================================================================
+*/
+function playRound(playerSelection, computerSelection) {
+        if (playerSelection === 'rock' && computerSelection === 'rock') {
+         return 'Its a tie! You both picked rock, seems like you\'re both rock-solid.'
+        } else if (playerSelection === 'rock' && computerSelection === 'paper') {
+                computerScore++
+        return 'You lose! A rock ain\'t always a hard place, sometimes paper can cover it!'
+        } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+                playerScore++
+        return 'You win! Rock and roll baby!';
+        } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+                playerScore++
+        return 'You win! Looks like the computer just got schooled, paper always wins.' 
+        } else if (playerSelection === 'paper' && computerSelection === 'paper') {
+        return 'It\'s a tie! You both picked paper, but let\'s be real, paper is the best choice anyway.' 
+        } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+                computerScore++
+        return 'You lose! Looks like paper just met its mortal enemy, scissors always wins!'
+        } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+                computerScore++
+        return 'You lose! But I bet the rock band next door is loving this!';
+         } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+                playerScore++
+        return 'You win! Looks like the computer got cut down to size!'
+        }  else {
+        return 'It\'s a tie! You both picked scissorts, seems like you both have a sharp mind and cutting edge strategy!........defealt';
+}
+}
+
+
+
+//functie voor het maken van de computer's keuze
+//let randomChoice;
+
+//const randomChoice = (Math.floor(Math.random() * 3)) + 1
+
+
+
+
+// Note from Keenan - Declare variables within game function.
+//let playerSelection;
+//let computerSelection;
 
 
 function game() {
-        for (let i=0; i <=4; i++) {
-                randomChoice = Math.floor((Math.random() * 3));
-                computerSelection = getComputerChoice(randomChoice);
-                playerSelection = prompt("Choose rock, paper or scissors!");
-                playerSelection = playerSelection.toLocaleLowerCase();
-                playRound(playerSelection, computerSelection);
+        //for (let i=0; i <=4; i++) {
+          for (let i=0; i < 5; i++){
+                const playerSelection = prompt("Choose rock, paper or scissors!").toLowerCase();
+                const computerSelection = getComputerChoice();
+              //playerSelection = playerSelection.toLowerCase();
+              // below added console.log for results
+                console.log(playRound(playerSelection, computerSelection));
         }
 
         // if playerscore > computerscore player wins
 
+        if (playerScore > computerScore) {
+                return 'You Win!'
+        } else if (playerScore < computerScore) {
+                return 'You Lose!'
+        } else {
+                return 'Tie'
+        }
+
 }
 
-game(playRound(playerSelection, computerSelection));
+//Note from Keenan - Do not need to add parameters when calling function.
+/*
+console.log(game(playRound(playerSelection, computerSelection))
+*/
+
+console.log(game())
